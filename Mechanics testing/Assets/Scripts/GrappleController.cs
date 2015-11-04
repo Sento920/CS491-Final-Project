@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
+public class GrappleController : MonoBehaviour {
 	private float dist;
 	private Vector3 mousePos;
 	private float newX;
