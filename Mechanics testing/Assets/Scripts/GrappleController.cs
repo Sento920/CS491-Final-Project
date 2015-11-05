@@ -7,15 +7,19 @@ public class GrappleController : MonoBehaviour {
 	private float newX;
 	private float newY;
 	private Rigidbody2D rb2D;
+	private LineRendererCode lrc;
 	// Use this for initialization
 	void Start () {
 //		GetComponentInChildren<LineRendererCode>().myPoint1 = transform.position;
 		rb2D = GetComponent<Rigidbody2D> ();
+		lrc = GetComponentInChildren<LineRendererCode> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		GetComponentInChildren<LineRendererCode>().myPoint2 = Vector2.Lerp(mousePos, transform.position, dist);
+
+//		lrc.myPoint2 = Vector2.Lerp(mousePos, transform.position, dist);
+				lrc.myPoint2 = Vector2.Lerp(transform.position, mousePos, dist);
 		transform.rotation = Quaternion.LookRotation (Vector3.forward, mousePos - transform.position);
 		if (Input.GetMouseButton (0)) {
 
@@ -27,7 +31,7 @@ public class GrappleController : MonoBehaviour {
 
 
 			GetComponent<DistanceJoint2D> ().connectedAnchor = mousePos;
-			GetComponentInChildren<LineRendererCode>().myPoint1 = transform.position;
+			lrc.myPoint1 = transform.position;
 
 
 //			print (Vector3.Distance(transform.position, mousePos));
