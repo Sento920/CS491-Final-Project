@@ -29,8 +29,6 @@ public class GrappleController : MonoBehaviour
 	{
 		parentPos = parent.position;
 
-		print (parentPos);
-		print (transform.position);
 		dist = Vector3.Distance (parentPos, hitPos);
 		lrc.myPoint1 = parentPos;
 		lrc.myPoint2 = transform.position;

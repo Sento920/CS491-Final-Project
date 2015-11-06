@@ -12,14 +12,23 @@ public class LineRendererCode : MonoBehaviour {
 	public Material myMaterial;
 	public float xScaleFactor;
 	private float adjustedXSize;
+
+	private Material instancedMaterial;
 	
 	// Update is called once per frame
+	void Start() {
+		instancedMaterial = new Material (myMaterial);
+		GetComponent<LineRenderer> ().material = instancedMaterial;
+	}
+
+
 	void Update () {
-		myMaterial.SetTexture(0, mySprite);
+		print (instancedMaterial.mainTextureScale);
+		instancedMaterial.SetTexture(0, mySprite);
 		GetComponent<LineRenderer> ().SetPosition (0, myPoint1);
 		GetComponent<LineRenderer> ().SetPosition (1, myPoint2);
 		adjustedXSize = xScaleFactor * (Mathf.Abs(Vector2.Distance(myPoint1, myPoint2)));
 		
-		myMaterial.mainTextureScale = new Vector2(adjustedXSize, myMaterial.mainTextureScale.y);
+		instancedMaterial.mainTextureScale = new Vector2(adjustedXSize, instancedMaterial.mainTextureScale.y);
 	}
 }
