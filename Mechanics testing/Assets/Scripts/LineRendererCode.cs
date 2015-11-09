@@ -23,7 +23,6 @@ public class LineRendererCode : MonoBehaviour {
 
 
 	void Update () {
-		print (instancedMaterial.mainTextureScale);
 		instancedMaterial.SetTexture(0, mySprite);
 		GetComponent<LineRenderer> ().SetPosition (0, myPoint1);
 		GetComponent<LineRenderer> ().SetPosition (1, myPoint2);

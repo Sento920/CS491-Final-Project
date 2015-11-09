@@ -13,6 +13,7 @@ public class GrappleController : MonoBehaviour
 	public Transform parent;
 	private Vector3 parentPos;
 	private bool fired;
+	private float prevX;
 	// Use this for initialization
 	void Start ()
 	{
@@ -22,6 +23,7 @@ public class GrappleController : MonoBehaviour
 		lrc.myPoint1 = parentPos;
 		rb2D = GetComponent<Rigidbody2D> ();
 		dj2D = GetComponentInParent<DistanceJoint2D> ();
+		prevX = parentPos.x;
 	}
 	
 	// Update is called once per frame
@@ -46,6 +48,12 @@ public class GrappleController : MonoBehaviour
 		if (fired) {
 			dj2D.distance -= Input.GetAxis("Vertical")/2f;
 		}
+		print ("Prev X: " + prevX);
+		print ("Curr parent pos: " + parentPos.x);
+		if (prevX == parentPos.x) {
+			print (true);
+		}
+		prevX = parentPos.x;
 	}
 
 	void OnCollisionEnter2D (Collision2D coll)
