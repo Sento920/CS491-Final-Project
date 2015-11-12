@@ -47,12 +47,13 @@ public class GrappleController : MonoBehaviour
 			rb2D.AddForce (transform.up * 1000);
 		} 
 		if (grappleHit) {
-			sj2D.distance -= Input.GetAxis("Vertical")/2f;
+			sj2D.distance -= Input.GetAxis("Vertical")/4f;
 		}
-		if (Input.GetKeyDown (KeyCode.LeftShift) && fired) {
+		if (Input.GetKeyDown (KeyCode.LeftShift) && grappleHit) {
 			sj2D.enabled = false;
 			GetComponent<SpriteRenderer>().enabled = false;
 			rb2D.constraints = RigidbodyConstraints2D.None;
+			grappleHit = false;
 			fired = false;
 		}
 	}
