@@ -13,7 +13,7 @@ public class GrappleController : MonoBehaviour
 	public Transform parent;
 	private Vector3 parentPos;
 	private bool fired;
-	private float prevX;
+	private bool grappleHit;
 	// Use this for initialization
 	void Start ()
 	{
@@ -23,12 +23,12 @@ public class GrappleController : MonoBehaviour
 		lrc.myPoint1 = parentPos;
 		rb2D = GetComponent<Rigidbody2D> ();
 		sj2D = GetComponentInParent<SpringJoint2D> ();
-		prevX = parentPos.x;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		print (transform.up);
 		parentPos = parent.position;
 
 		dist = Vector3.Distance (parentPos, hitPos);
@@ -43,21 +43,23 @@ public class GrappleController : MonoBehaviour
 
 		if (Input.GetKeyDown (KeyCode.Space) && !fired) {
 			fired = true;
+			GetComponent<SpriteRenderer>().enabled = true;
 			rb2D.AddForce (transform.up * 1000);
-		}
-		if (fired) {
+		} 
+		if (grappleHit) {
 			sj2D.distance -= Input.GetAxis("Vertical")/2f;
 		}
-		print ("Prev X: " + prevX);
-		print ("Curr parent pos: " + parentPos.x);
-		if (prevX == parentPos.x) {
-			print (true);
+		if (Input.GetKeyDown (KeyCode.LeftShift) && fired) {
+			sj2D.enabled = false;
+			GetComponent<SpriteRenderer>().enabled = false;
+			rb2D.constraints = RigidbodyConstraints2D.None;
+			fired = false;
 		}
-		prevX = parentPos.x;
 	}
 
 	void OnCollisionEnter2D (Collision2D coll)
 	{
+		grappleHit = true;
 		hitPos = coll.contacts [0].point;
 		transform.position = hitPos;
 		rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
