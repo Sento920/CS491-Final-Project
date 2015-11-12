@@ -9,7 +9,7 @@ public class GrappleController : MonoBehaviour
 	private float newY;
 	private Rigidbody2D rb2D;
 	private LineRendererCode lrc;
-	private DistanceJoint2D dj2D;
+	private SpringJoint2D sj2D;
 	public Transform parent;
 	private Vector3 parentPos;
 	private bool fired;
@@ -22,7 +22,7 @@ public class GrappleController : MonoBehaviour
 		lrc = GetComponentInChildren<LineRendererCode> ();
 		lrc.myPoint1 = parentPos;
 		rb2D = GetComponent<Rigidbody2D> ();
-		dj2D = GetComponentInParent<DistanceJoint2D> ();
+		sj2D = GetComponentInParent<SpringJoint2D> ();
 		prevX = parentPos.x;
 	}
 	
@@ -46,7 +46,7 @@ public class GrappleController : MonoBehaviour
 			rb2D.AddForce (transform.up * 1000);
 		}
 		if (fired) {
-			dj2D.distance -= Input.GetAxis("Vertical")/2f;
+			sj2D.distance -= Input.GetAxis("Vertical")/2f;
 		}
 		print ("Prev X: " + prevX);
 		print ("Curr parent pos: " + parentPos.x);
@@ -61,8 +61,8 @@ public class GrappleController : MonoBehaviour
 		hitPos = coll.contacts [0].point;
 		transform.position = hitPos;
 		rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
-		dj2D.connectedAnchor = hitPos;
-		dj2D.enabled = true;
-		dj2D.distance = dist;
+		sj2D.connectedAnchor = hitPos;
+		sj2D.distance = dist;
+		sj2D.enabled = true;
 	}
 }
