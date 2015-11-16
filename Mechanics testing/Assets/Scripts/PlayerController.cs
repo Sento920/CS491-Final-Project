@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		rb2D = GetComponent<Rigidbody2D> ();
 		animator = GetComponent<Animator> ();
+		animator.SetBool("isGrounded", true);
+
 	}
 	
 	// Update is called once per frame
@@ -15,14 +17,13 @@ public class PlayerController : MonoBehaviour {
 		float push = Input.GetAxis ("Horizontal");
 		if (push != 0) {
 			rb2D.velocity=(new Vector2(push * 5, 0));
-			animator.SetBool("isGrounded", true);
 			if (push < 0) {
-				transform.localScale = new Vector2(-1,1);
+				animator.SetInteger("WalkDir", -1);
 			} else {
-				transform.localScale = new Vector2(1,1);
+				animator.SetInteger("WalkDir", 1);
 			}
 		} else {
-			animator.SetBool("isGrounded", false);
+			animator.SetInteger("WalkDir", 0);
 		}
 	}
 }

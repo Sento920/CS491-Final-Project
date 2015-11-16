@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0f91044187fd7e343bff6d3d97a7aaea
-timeCreated: 1447086083
+timeCreated: 1447691822
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,10 @@ TextureImporter:
     21300002: RobH_1
     21300004: RobH_2
     21300006: RobH_3
+    21300008: RobH_4
+    21300010: RobH_5
+    21300012: RobH_6
+    21300014: RobH_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -57,42 +61,82 @@ TextureImporter:
     - name: RobH_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 0
-        width: 23
+        x: 0
+        y: 32
+        width: 32
         height: 32
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: RobH_1
       rect:
         serializedVersion: 2
-        x: 36
-        y: 0
-        width: 23
+        x: 32
+        y: 32
+        width: 32
         height: 32
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: RobH_2
       rect:
         serializedVersion: 2
-        x: 68
-        y: 0
-        width: 23
+        x: 64
+        y: 32
+        width: 32
         height: 32
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: RobH_3
       rect:
         serializedVersion: 2
-        x: 100
-        y: 0
-        width: 23
+        x: 96
+        y: 32
+        width: 32
         height: 32
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RobH_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RobH_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RobH_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RobH_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
