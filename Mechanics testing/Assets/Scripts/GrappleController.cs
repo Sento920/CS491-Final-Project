@@ -14,6 +14,7 @@ public class GrappleController : MonoBehaviour
 	private Vector3 parentPos;
 	private bool fired;
 	private bool grappleHit;
+	private Vector3 mousePos;
 	// Use this for initialization
 	void Start ()
 	{
@@ -31,14 +32,14 @@ public class GrappleController : MonoBehaviour
 		print (transform.up);
 		parentPos = parent.position;
 
-		dist = Vector3.Distance (parentPos, hitPos);
+
 		lrc.myPoint1 = parentPos;
 		lrc.myPoint2 = transform.position;
 		if (!fired) {
-			hitPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-			hitPos.z = 0f;
+			mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+			mousePos.z = 0f;
 			transform.position = parentPos;
-			transform.rotation = Quaternion.LookRotation (Vector3.forward, hitPos - transform.position);
+			transform.rotation = Quaternion.LookRotation (Vector3.forward, mousePos - transform.position);
 		}
 
 		if (Input.GetKeyDown (KeyCode.Space) && !fired) {
@@ -62,6 +63,7 @@ public class GrappleController : MonoBehaviour
 	{
 		grappleHit = true;
 		hitPos = coll.contacts [0].point;
+		dist = Vector3.Distance (parentPos, hitPos);
 		transform.position = hitPos;
 		rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
 		sj2D.connectedAnchor = hitPos;
