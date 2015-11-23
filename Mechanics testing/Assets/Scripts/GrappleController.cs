@@ -52,6 +52,16 @@ public class GrappleController : MonoBehaviour
 			GetComponent<SpriteRenderer>().enabled = true;
 			rb2D.AddForce (transform.up * 1500);
 		} 
+
+		if (Vector3.Distance (playerPos, transform.position) >= grappleMaxDist) {
+			print (rb2D.velocity);
+			rb2D.velocity = Vector2.zero;
+			ResetGrapple();
+		}
+//		if (fired) {
+//			sj2D.enabled = true;
+//			sj2D.distance = Mathf.Clamp(sj2D.distance + 0.1f, 0, grappleMaxDist);
+//		}
 		//move up/down rope
 		if (grappleHit) {
 			sj2D.distance = Mathf.Clamp(sj2D.distance - Input.GetAxis("Vertical")/4f, 0, grappleMaxDist);
