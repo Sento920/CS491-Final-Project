@@ -84,14 +84,18 @@ public class GrappleController : MonoBehaviour
 	
 	void OnCollisionEnter2D (Collision2D coll)
 	{
-		grappleHit = true;
-		hitPos = coll.contacts [0].point;
-		dist = Vector3.Distance (playerPos, hitPos);
-		transform.position = hitPos;
-		rb2D.transform.rotation = Quaternion.identity;
-		rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
-		sj2D.connectedAnchor = hitPos;
-		sj2D.distance = dist;
-		sj2D.enabled = true;
+		if (coll.gameObject.tag == "grapplePoint") {
+			grappleHit = true;
+			hitPos = coll.contacts [0].point;
+			dist = Vector3.Distance (playerPos, hitPos);
+			transform.position = hitPos;
+			rb2D.transform.rotation = Quaternion.identity;
+			rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
+			sj2D.connectedAnchor = hitPos;
+			sj2D.distance = dist;
+			sj2D.enabled = true;
+		} else {
+			ResetGrapple();
+		}
 	}
 }
