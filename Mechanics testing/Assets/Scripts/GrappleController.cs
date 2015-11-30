@@ -40,8 +40,10 @@ public class GrappleController : MonoBehaviour
 		if (!fired) {
 			mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 			mousePos.z = 0f;
+			rb2D.isKinematic = true;
 			transform.position = playerPos;
 			transform.rotation = Quaternion.LookRotation (Vector3.forward, mousePos - transform.position);
+			rb2D.isKinematic = false;
 		}
 
 		//fire grapple
@@ -50,9 +52,10 @@ public class GrappleController : MonoBehaviour
 			lrc.enabled = true;
 			GetComponentInChildren<LineRenderer> ().enabled = true;
 			GetComponent<SpriteRenderer>().enabled = true;
+			rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
 			rb2D.AddForce (transform.up * 1500);
 		} 
-
+		// stop grapple if past max distance
 		if (Vector3.Distance (playerPos, transform.position) >= grappleMaxDist) {
 			print (rb2D.velocity);
 			rb2D.velocity = Vector2.zero;
