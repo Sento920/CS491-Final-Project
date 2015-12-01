@@ -7,9 +7,11 @@ public class PlayerController : MonoBehaviour
 	public GameObject aimBar;
 	private PowerBar powerBar;
 	public GameObject arrow;
+	public LayerMask layerMask;
+	public Transform groundCheck;
 	private Animator animator;
 	private MouseAim mouseAim;
-	private bool isGrounded;
+	public bool isGrounded;
 	private bool direction;
 	// Use this for initialization
 	void Start ()
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		isGrounded = Physics2D.OverlapCircle (groundCheck.position, 0.2f, layerMask);
 		float push = Input.GetAxis ("Horizontal");
 		if (isGrounded && push != 0) {
 			rb2D.velocity = (new Vector2 (push * 5, 0));
@@ -41,16 +44,22 @@ public class PlayerController : MonoBehaviour
 			animator.SetBool ("Walk", false);
 		}
 
-		if (direction) {
-			transform.localScale = new Vector2 (1, 1);
-		} else {
-			transform.localScale = new Vector2 (-1, 1);
+		//change direction for walking
+		if (isGrounded) {
+			if (direction) {
+				transform.localScale = new Vector2 (1, 1);
+			} else {
+				transform.localScale = new Vector2 (-1, 1);
+			}
 		}
 
-		if (Input.GetMouseButtonUp(1)) {
-			print (powerBar.power);
-			GameObject tmp = Instantiate(arrow, transform.position, aimBar.transform.localRotation) as GameObject;
-			tmp.GetComponent<Rigidbody2D>().AddForce(aimBar.transform.right * powerBar.power * 800);
+		//fire arrow
+		if (Input.GetMouseButtonUp (1)) {
+			GameObject.Find ("Power bar").GetComponent<SpriteRenderer> ().enabled = false;
+			GameObject tmp = Instantiate (arrow, transform.position, aimBar.transform.localRotation) as GameObject;
+			tmp.GetComponent<Rigidbody2D> ().AddForce (aimBar.transform.right * powerBar.power * 800);
+		} else if (Input.GetMouseButtonDown (1)) {
+			GameObject.Find ("Power bar").GetComponent<SpriteRenderer> ().enabled = true;
 		}
 	}
 }

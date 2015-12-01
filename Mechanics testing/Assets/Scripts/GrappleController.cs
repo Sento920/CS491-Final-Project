@@ -9,18 +9,21 @@ public class GrappleController : MonoBehaviour
 	private float newY;
 	private Rigidbody2D rb2D;
 	private LineRendererCode lrc;
+	private PlayerController playerController;
 	private SpringJoint2D sj2D;
 	public Transform parent;
 	private Vector3 playerPos;
 	private bool fired;
 	private bool grappleHit;
-	public float grappleMaxDist;
+	public float airMaxDist;
+	private float groundMaxDist;
 	private Vector3 mousePos;
 	// Use this for initialization
 	void Start ()
 	{
 		//		GetComponentInChildren<LineRendererCode>().myPoint1 = transform.position;
 		playerPos = parent.position;
+		playerController = GetComponentInParent<PlayerController> ();
 		lrc = GetComponentInChildren<LineRendererCode> ();
 		lrc.enabled = false;
 		lrc.myPoint1 = playerPos;
@@ -40,10 +43,8 @@ public class GrappleController : MonoBehaviour
 		if (!fired) {
 			mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 			mousePos.z = 0f;
-			rb2D.isKinematic = true;
 			transform.position = playerPos;
 			transform.rotation = Quaternion.LookRotation (Vector3.forward, mousePos - transform.position);
-			rb2D.isKinematic = false;
 		}
 
 		//fire grapple
@@ -52,11 +53,10 @@ public class GrappleController : MonoBehaviour
 			lrc.enabled = true;
 			GetComponentInChildren<LineRenderer> ().enabled = true;
 			GetComponent<SpriteRenderer>().enabled = true;
-			rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
 			rb2D.AddForce (transform.up * 1500);
 		} 
-		// stop grapple if past max distance
-		if (Vector3.Distance (playerPos, transform.position) >= grappleMaxDist) {
+
+		if (Vector3.Distance (playerPos, transform.position) >= airMaxDist) {
 			print (rb2D.velocity);
 			rb2D.velocity = Vector2.zero;
 			ResetGrapple();
@@ -67,7 +67,12 @@ public class GrappleController : MonoBehaviour
 //		}
 		//move up/down rope
 		if (grappleHit) {
-			sj2D.distance = Mathf.Clamp(sj2D.distance - Input.GetAxis("Vertical")/4f, 0, grappleMaxDist);
+			if(playerController.isGrounded) {
+				sj2D.distance = Mathf.Clamp(sj2D.distance - Input.GetAxis("Vertical")/4f, 0, groundMaxDist);
+			} else {
+				sj2D.distance = Mathf.Clamp(sj2D.distance - Input.GetAxis("Vertical")/4f, 0, airMaxDist);
+			}
+
 		}
 		//release grapple
 		if (Input.GetMouseButtonDown(0) && grappleHit) {
@@ -95,6 +100,7 @@ public class GrappleController : MonoBehaviour
 			rb2D.transform.rotation = Quaternion.identity;
 			rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
 			sj2D.connectedAnchor = hitPos;
+			groundMaxDist = dist;
 			sj2D.distance = dist;
 			sj2D.enabled = true;
 		} else {

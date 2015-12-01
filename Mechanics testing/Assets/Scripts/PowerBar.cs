@@ -11,7 +11,6 @@ public class PowerBar : MonoBehaviour
 	void Start ()
 	{
 		chargeTime = 0;
-//		health = Mathf.Lerp (0, 100, 5);
 	}
 	
 	// Update is called once per frame
