@@ -27,7 +27,8 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		isGrounded = Physics2D.OverlapCircle (groundCheck.position, 0.2f, layerMask);
+		isGrounded = Physics2D.OverlapCircle (groundCheck.position, 0.25f, layerMask);
+		print(isGrounded);
 		float push = Input.GetAxis ("Horizontal");
 		if (isGrounded && push != 0) {
 			rb2D.velocity = (new Vector2 (push * 5, 0));
