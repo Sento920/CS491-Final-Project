@@ -27,11 +27,11 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		isGrounded = Physics2D.OverlapCircle (groundCheck.position, 0.25f, layerMask);
-		print(isGrounded);
+		isGrounded = Physics2D.OverlapCircle (groundCheck.position, 0.15f, layerMask);
+		print (isGrounded);
 		float push = Input.GetAxis ("Horizontal");
 		if (isGrounded && push != 0) {
-			rb2D.velocity = (new Vector2 (push * 5, 0));
+			rb2D.velocity = (new Vector2 (push * 5, rb2D.velocity.y));
 			animator.SetBool ("isGrounded", true);
 			animator.SetBool ("Walk", true);
 			if (push < 0) {
@@ -47,6 +47,9 @@ public class PlayerController : MonoBehaviour
 
 		//change direction for walking
 		if (isGrounded) {
+			if(Input.GetButtonDown("Jump")) {
+				rb2D.velocity = new Vector2(rb2D.velocity.x, 6f);
+			}
 			if (direction) {
 				transform.localScale = new Vector2 (1, 1);
 			} else {

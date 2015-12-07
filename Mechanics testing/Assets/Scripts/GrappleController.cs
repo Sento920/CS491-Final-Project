@@ -67,6 +67,7 @@ public class GrappleController : MonoBehaviour
 //		}
 		//move up/down rope
 		if (grappleHit) {
+			transform.position = hitPos;
 			if(playerController.isGrounded) {
 				sj2D.distance = Mathf.Clamp(sj2D.distance - Input.GetAxis("Vertical")/4f, 0, groundMaxDist);
 			} else {
@@ -100,8 +101,8 @@ public class GrappleController : MonoBehaviour
 			rb2D.transform.rotation = Quaternion.identity;
 			rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
 			sj2D.connectedAnchor = hitPos;
-			groundMaxDist = dist;
-			sj2D.distance = dist;
+			groundMaxDist = dist-1f;
+			sj2D.distance = dist-1f;
 			sj2D.enabled = true;
 		} else {
 			ResetGrapple();
