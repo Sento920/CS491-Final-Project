@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour
 	void Update ()
 	{
 		isGrounded = Physics2D.OverlapCircle (groundCheck.position, 0.15f, layerMask);
-		print (isGrounded);
 		float push = Input.GetAxis ("Horizontal");
 		if (isGrounded && push != 0) {
 			rb2D.velocity = (new Vector2 (push * 5, rb2D.velocity.y));
@@ -60,18 +59,24 @@ public class PlayerController : MonoBehaviour
 		//fire arrow
 		if (Input.GetMouseButtonUp (1)) {
 			GameObject.Find ("Power bar").GetComponent<SpriteRenderer> ().enabled = false;
-			if(direction) {
-				mouseAim.dir = true;
-			GameObject tmp = Instantiate (arrow, transform.position, aimBar.transform.localRotation) as GameObject;
+//			if(direction) {
+//				mouseAim.dir = true;
+			Vector2 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+
+			float angle = Mathf.Atan2 (mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
+		
+			GameObject tmp = Instantiate (arrow, transform.position, Quaternion.AngleAxis(angle, mousePos)) as GameObject;
+			print ("arrow right " + tmp.transform.right);
+			print ("aimbar right " + aimBar.transform.right);
 				tmp.GetComponent<Rigidbody2D> ().AddForce (aimBar.transform.right * powerBar.power * 800);
 
-			} else {
-				mouseAim.dir = false;
-				GameObject tmp = Instantiate (arrow, transform.position, aimBar.transform.localRotation) as GameObject;
-				tmp.GetComponent<Rigidbody2D> ().AddForce (aimBar.transform.right * powerBar.power * 800);
-
-
-			}
+//			} else {
+//				mouseAim.dir = false;
+//				GameObject tmp = Instantiate (arrow, transform.position, aimBar.transform.localRotation) as GameObject;
+//				tmp.GetComponent<Rigidbody2D> ().AddForce (aimBar.transform.right * powerBar.power * 800);
+//
+//
+//			}
 		} else if (Input.GetMouseButtonDown (1)) {
 			GameObject.Find ("Power bar").GetComponent<SpriteRenderer> ().enabled = true;
 		}

@@ -57,7 +57,6 @@ public class GrappleController : MonoBehaviour
 		} 
 
 		if (Vector3.Distance (playerPos, transform.position) >= airMaxDist) {
-			print (rb2D.velocity);
 			rb2D.velocity = Vector2.zero;
 			ResetGrapple();
 		}

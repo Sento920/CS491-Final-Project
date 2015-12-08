@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MouseAim : MonoBehaviour
+public class MouseAim2 : MonoBehaviour
 {
 	private Vector3 mousePos;
 	public bool dir;
