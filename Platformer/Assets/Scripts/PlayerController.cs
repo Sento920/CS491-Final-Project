@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
 	private Rigidbody2D rb2D;
-	public GameObject aimBar;
+	public GameObject arrowAim;
 	private PowerBar powerBar;
 	public GameObject arrow;
 	public LayerMask layerMask;
@@ -67,8 +67,8 @@ public class PlayerController : MonoBehaviour
 		
 			GameObject tmp = Instantiate (arrow, transform.position, Quaternion.AngleAxis(angle, mousePos)) as GameObject;
 			print ("arrow right " + tmp.transform.right);
-			print ("aimbar right " + aimBar.transform.right);
-				tmp.GetComponent<Rigidbody2D> ().AddForce (aimBar.transform.right * powerBar.power * 800);
+			print ("aimbar right " + arrowAim.transform.right);
+				tmp.GetComponent<Rigidbody2D> ().AddForce (arrowAim.transform.right * powerBar.power * 800);
 
 //			} else {
 //				mouseAim.dir = false;
