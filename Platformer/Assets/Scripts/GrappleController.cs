@@ -13,7 +13,7 @@ public class GrappleController : MonoBehaviour
 	private SpringJoint2D sj2D;
 	public Transform parent;
 	private Vector3 playerPos;
-	private bool fired;
+	public bool fired;
 	private bool grappleHit;
 	public float airMaxDist;
 	private float groundMaxDist;
