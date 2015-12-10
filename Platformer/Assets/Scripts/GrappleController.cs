@@ -18,10 +18,15 @@ public class GrappleController : MonoBehaviour
 	public float airMaxDist;
 	private float groundMaxDist;
 	private Vector3 mousePos;
+    private AudioSource audioSource;
+    public AudioClip grappleShoot;
+    public AudioClip grappleImpact;
+    public AudioClip grappleImpactFlub;
 	// Use this for initialization
 	void Start ()
 	{
 		//		GetComponentInChildren<LineRendererCode>().myPoint1 = transform.position;
+        audioSource = GetComponent<AudioSource>();
 		playerPos = parent.position;
 		playerController = GetComponentInParent<PlayerController> ();
 		lrc = GetComponentInChildren<LineRendererCode> ();
@@ -54,6 +59,7 @@ public class GrappleController : MonoBehaviour
 			GetComponentInChildren<LineRenderer> ().enabled = true;
 			GetComponent<SpriteRenderer>().enabled = true;
 			rb2D.AddForce (transform.up * 1500);
+            audioSource.PlayOneShot(grappleShoot);
 		} 
 
 		if (Vector3.Distance (playerPos, transform.position) >= airMaxDist) {
@@ -93,6 +99,7 @@ public class GrappleController : MonoBehaviour
 	void OnCollisionEnter2D (Collision2D coll)
 	{
 		if (coll.gameObject.tag == "grapplePoint") {
+            audioSource.PlayOneShot(grappleImpact);
 			grappleHit = true;
 			hitPos = coll.contacts [0].point;
 			dist = Vector3.Distance (playerPos, hitPos);
@@ -104,6 +111,7 @@ public class GrappleController : MonoBehaviour
 			sj2D.distance = dist-1f;
 			sj2D.enabled = true;
 		} else {
+            audioSource.PlayOneShot(grappleImpactFlub);
 			ResetGrapple();
 		}
 	}
