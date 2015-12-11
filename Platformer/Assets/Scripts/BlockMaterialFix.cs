@@ -7,7 +7,7 @@ public class BlockMaterialFix : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         instancedMaterial = new Material(GetComponent<Renderer>().material);
-        instancedMaterial.mainTextureScale = new Vector2(-transform.localScale.x, -transform.localScale.y);
+        instancedMaterial.mainTextureScale = new Vector2(-transform.localScale.x, -transform.localScale.y + 0.01f);
         GetComponent<Renderer>().material = instancedMaterial;
 	}
 	
