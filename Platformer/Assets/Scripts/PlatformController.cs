@@ -13,7 +13,7 @@ public class PlatformController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (player.transform.parent != null) {
+		if (player != null && player.transform.parent != null) {
 			print (player.GetComponent<Rigidbody2D>().velocity);
 		}
 		if(Input.GetKeyDown(KeyCode.Space) && player.transform.parent != null) {
@@ -44,7 +44,7 @@ public class PlatformController : MonoBehaviour {
 
 	void OnCollisionExit2D(Collision2D coll) {
 		player.transform.parent = null;
-		if (transform.GetChild (0) != null) {
+		if (transform.childCount != 0) {
 			Destroy (transform.FindChild ("New Game Object").gameObject);
 		}
 	}
