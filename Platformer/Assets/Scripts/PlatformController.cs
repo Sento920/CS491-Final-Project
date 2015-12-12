@@ -16,7 +16,7 @@ public class PlatformController : MonoBehaviour {
 		if (player != null && player.transform.parent != null) {
 			print (player.GetComponent<Rigidbody2D>().velocity);
 		}
-		if(Input.GetKeyDown(KeyCode.Space) && player.transform.parent != null) {
+		if(Input.GetKeyDown(KeyCode.Space) && player != null && player.transform.parent != null) {
 			player.transform.parent = null;
 		}
 		if (Mathf.Abs(Vector3.Distance (transform.position, target.transform.position)) <= 1 ||
