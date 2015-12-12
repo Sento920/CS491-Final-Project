@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask layerMask;
     public Transform groundCheck;
     private Animator animator;
-    private bool direction;
+    public bool direction;
     private float nextFire;
     private GrappleController grapple;
     private MouseAim mouseAim;

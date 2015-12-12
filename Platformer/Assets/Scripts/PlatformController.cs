@@ -14,7 +14,7 @@ public class PlatformController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (player != null && player.transform.parent != null) {
-			print (player.GetComponent<Rigidbody2D>().velocity);
+			
 		}
 		if(Input.GetKeyDown(KeyCode.Space) && player != null && player.transform.parent != null) {
 			player.transform.parent = null;
