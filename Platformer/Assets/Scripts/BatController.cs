@@ -13,7 +13,6 @@ public class BatController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         currLerpTime = Time.deltaTime;
-        print(Vector3.Distance(transform.position, target.transform.position));
         float dist = Vector3.Distance(transform.position, target.transform.position);
         float t = currLerpTime / lerpChange;
         t = Mathf.Sin(t * Mathf.PI * 0.5f);
