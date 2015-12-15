@@ -21,4 +21,10 @@ public class BatController : MonoBehaviour {
 			rb2D.MovePosition(Vector3.MoveTowards(transform.position, target.transform.position, t));
         }      
 	}
+
+	void OnCollisionEnter2D(Collision2D coll) {
+		if(coll.gameObject.layer == LayerMask.NameToLayer("Arrow")) {
+			Destroy(gameObject);
+		}
+	}
 }
