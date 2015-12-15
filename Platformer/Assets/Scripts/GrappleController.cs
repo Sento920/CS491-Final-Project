@@ -8,6 +8,7 @@ public class GrappleController : MonoBehaviour
 	private float newX;
 	private float newY;
 	private Rigidbody2D rb2D;
+	private BoxCollider2D bc2D;
 	private LineRendererCode lrc;
 	private PlayerController playerController;
 	private SpringJoint2D sj2D;
@@ -33,6 +34,7 @@ public class GrappleController : MonoBehaviour
 		lrc.enabled = false;
 		lrc.myPoint1 = playerPos;
 		rb2D = GetComponent<Rigidbody2D> ();
+		bc2D = GetComponent<BoxCollider2D> ();
 		sj2D = GetComponentInParent<SpringJoint2D> ();
 	}
 	
@@ -50,14 +52,19 @@ public class GrappleController : MonoBehaviour
 			mousePos.z = 0f;
 			transform.position = playerPos;
 			transform.rotation = Quaternion.LookRotation (Vector3.forward, mousePos - transform.position);
+			bc2D.enabled = false;
+
 		}
 
 		//fire grapple
 		if (Input.GetMouseButtonDown(0) && !fired) {
 			fired = true;
+			bc2D.enabled = true;
 			lrc.enabled = true;
 			GetComponentInChildren<LineRenderer> ().enabled = true;
 			GetComponent<SpriteRenderer>().enabled = true;
+			rb2D.velocity = Vector3.zero;
+			rb2D.angularVelocity = 0f;
 			rb2D.AddForce (transform.up * 1500);
             audioSource.PlayOneShot(grappleShoot);
 		} 
