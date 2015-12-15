@@ -88,7 +88,7 @@ public class GrappleController : MonoBehaviour
 
 		}
 		//release grapple
-		if (Input.GetMouseButtonDown(0) && grappleHit) {
+		if (Input.GetMouseButtonUp(0) && grappleHit) {
 			ResetGrapple();
 		}
 	}
