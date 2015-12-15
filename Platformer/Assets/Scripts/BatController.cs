@@ -4,10 +4,11 @@ using System.Collections;
 public class BatController : MonoBehaviour {
     public GameObject target;
     private float currLerpTime;
+	private Rigidbody2D rb2D;
     public float lerpChange;
 	// Use this for initialization
 	void Start () {
-      
+		rb2D = GetComponent<Rigidbody2D> ();
 	}
 	
 	// Update is called once per frame
@@ -17,11 +18,7 @@ public class BatController : MonoBehaviour {
         float t = currLerpTime / lerpChange;
         t = Mathf.Sin(t * Mathf.PI * 0.5f);
         if (Vector3.Distance(transform.position, target.transform.position) <= 15) {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, t);
-        }
-    
-        //transform.position = Vector3.Lerp(transform.position, target.transform.position, Time.deltaTime);
-
-       
+			rb2D.MovePosition(Vector3.MoveTowards(transform.position, target.transform.position, t));
+        }      
 	}
 }
