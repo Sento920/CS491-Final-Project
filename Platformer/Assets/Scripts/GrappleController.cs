@@ -15,7 +15,7 @@ public class GrappleController : MonoBehaviour
 	public Transform parent;
 	private Vector3 playerPos;
 	public bool fired;
-	private bool grappleHit;
+	public bool grappleHit;
 	public float airMaxDist;
 	private float groundMaxDist;
 	private Vector3 mousePos;

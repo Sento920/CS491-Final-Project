@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 	{
 		isGrounded = Physics2D.OverlapCircle (groundCheck.position, 0.15f, layerMask);
 		float push = Input.GetAxis ("Horizontal");
-		if (isGrounded && push != 0) {
+		if (!grapple.grappleHit && push != 0) {
 			rb2D.velocity = (new Vector2 (push * 5, rb2D.velocity.y));
 			animator.SetBool ("isGrounded", true);
 			animator.SetBool ("Walk", true);
