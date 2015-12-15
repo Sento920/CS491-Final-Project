@@ -5,7 +5,7 @@ using UnityEngine;
  public class Camera2D : MonoBehaviour {
      
      public float dampTime = 0.15f;
-	 public float horizShift;
+	private float horizShift;
 	 public float vertShift;
      private Vector3 velocity = Vector3.zero;
      public Transform target;
