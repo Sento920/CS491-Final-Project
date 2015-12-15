@@ -7,9 +7,11 @@ public class PowerBar : MonoBehaviour
 	public float health;
 	public float power;
 	private float chargeTime;
+	private SpriteRenderer parent;
 	// Use this for initialization
 	void Start ()
 	{
+		parent = transform.parent.GetComponent<SpriteRenderer>();
 		chargeTime = 0;
 	}
 	
@@ -17,10 +19,12 @@ public class PowerBar : MonoBehaviour
 	void Update ()
 	{
 		if (Input.GetMouseButton (1)) {
+			parent.enabled = true;
 			chargeTime+= 0.05f;
 			health = Mathf.Abs (Mathf.Sin (chargeTime));
 			power = transform.localScale.x;
 		} else {
+			parent.enabled = false;
 			chargeTime = 0;
 			health = 0;
 		}

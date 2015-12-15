@@ -65,32 +65,17 @@ public class PlayerController : MonoBehaviour
 
 		//fire arrow
         if (Time.time > nextFire) {
-            powerBar.enabled = true;
             if (Input.GetMouseButtonUp(1)) {
-                GameObject.Find("Power bar").GetComponent<SpriteRenderer>().enabled = false;
-                //			if(direction) {
-                //				mouseAim.dir = true;
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-//                float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
 				float angle =-Mathf.Atan2 (transform.position.y - mousePos.y, transform.position.x - mousePos.x) * Mathf.Rad2Deg;
                 GameObject tmp = Instantiate(arrow, transform.position, Quaternion.AngleAxis(angle, mousePos)) as GameObject;
                 print("arrow right " + tmp.transform.right);
                 print("aimbar right " + arrowAim.transform.right);
                 tmp.GetComponent<Rigidbody2D>().AddForce(arrowAim.transform.right * powerBar.power * 800);
                 nextFire = Time.time + timeBetweenShots;
+            } 
+			powerBar.enabled = true;
 
-                //			} else {
-                //				mouseAim.dir = false;
-                //				GameObject tmp = Instantiate (arrow, transform.position, aimBar.transform.localRotation) as GameObject;
-                //				tmp.GetComponent<Rigidbody2D> ().AddForce (aimBar.transform.right * powerBar.power * 800);
-                //
-                //
-                //			}
-            } else if (Input.GetMouseButtonDown(1)) {
-               
-                GameObject.Find("Power bar").GetComponent<SpriteRenderer>().enabled = true;
-            }
         } else {
             powerBar.enabled = false;
         }
