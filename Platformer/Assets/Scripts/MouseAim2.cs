@@ -5,16 +5,18 @@ public class MouseAim2 : MonoBehaviour
 {
 	private Vector3 mousePos;
 	public bool dir;
+	public Transform player;
 	private float angle;
 	// Use this for initialization
 	void Start ()
 	{
-		dir = true;
+//		dir = player.localScale.x == 1;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		dir = player.localScale.x == 1;
 		mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		if (dir) {
 			angle = Mathf.Atan2 (mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;

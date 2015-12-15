@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 		mouseAim = GetComponentInChildren<MouseAim> ();
         grapple = GetComponentInChildren<GrappleController>();
 		isGrounded = true;
-		direction = true;
+		direction = (transform.localScale.x == 1);
 	}
 	
 	// Update is called once per frame
@@ -72,8 +72,8 @@ public class PlayerController : MonoBehaviour
                 //				mouseAim.dir = true;
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-                float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
-
+//                float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
+				float angle =-Mathf.Atan2 (transform.position.y - mousePos.y, transform.position.x - mousePos.x) * Mathf.Rad2Deg;
                 GameObject tmp = Instantiate(arrow, transform.position, Quaternion.AngleAxis(angle, mousePos)) as GameObject;
                 print("arrow right " + tmp.transform.right);
                 print("aimbar right " + arrowAim.transform.right);

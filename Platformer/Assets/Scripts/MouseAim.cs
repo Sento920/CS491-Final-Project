@@ -9,7 +9,7 @@ public class MouseAim : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		dir = true;
+		dir = GetComponentInParent<Transform> ().localScale.x == 1;
 	}
 	
 	// Update is called once per frame
@@ -19,9 +19,9 @@ public class MouseAim : MonoBehaviour
 		if (dir) {
 			angle = Mathf.Atan2 (mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
 		} else {
-//			angle = Mathf.Atan2 (mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
+			angle = Mathf.Atan2 (mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
 
-			angle = -Mathf.Atan2 (transform.position.y - mousePos.y, transform.position.x - mousePos.x) * Mathf.Rad2Deg;
+//			angle = -Mathf.Atan2 (transform.position.y - mousePos.y, transform.position.x - mousePos.x) * Mathf.Rad2Deg;
 		}
 		transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);	
 

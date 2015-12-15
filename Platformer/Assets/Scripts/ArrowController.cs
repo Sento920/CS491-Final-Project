@@ -14,7 +14,6 @@ public class ArrowController : MonoBehaviour {
 			transform.right = rb2D.velocity;
 		}
         Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
-        print(Mathf.Abs(viewPos.x));
         if (viewPos.x >= 1 || viewPos.x <= 0) {
             if (transform.parent != null) {
                 Destroy(gameObject.transform.parent.gameObject);
