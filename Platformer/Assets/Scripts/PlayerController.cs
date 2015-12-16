@@ -69,8 +69,6 @@ public class PlayerController : MonoBehaviour
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				float angle =-Mathf.Atan2 (transform.position.y - mousePos.y, transform.position.x - mousePos.x) * Mathf.Rad2Deg;
                 GameObject tmp = Instantiate(arrow, transform.position, Quaternion.AngleAxis(angle, mousePos)) as GameObject;
-                print("arrow right " + tmp.transform.right);
-                print("aimbar right " + arrowAim.transform.right);
                 tmp.GetComponent<Rigidbody2D>().AddForce(arrowAim.transform.right * powerBar.power * 800);
                 nextFire = Time.time + timeBetweenShots;
             } 
