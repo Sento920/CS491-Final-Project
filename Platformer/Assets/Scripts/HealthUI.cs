@@ -10,6 +10,7 @@ public class HealthUI : MonoBehaviour {
     public Image h1;
     public Image h2;
     public Image h3;
+    private float waitTime;
 
     // Use this for initialization
     void Start() {
@@ -21,20 +22,28 @@ public class HealthUI : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if(HP == 3 && other.gameObject.CompareTag("Enemy")){
-            h3.sprite = Empty;
-            HP--;
-        }else if(HP == 2 && other.gameObject.CompareTag("Enemy"))
+        if (Time.time > waitTime)
         {
-            h2.sprite = Empty;
-            HP--;
-        }
-        else if(HP == 1 && other.gameObject.CompareTag("Enemy"))
-        {
-            h1.sprite = Empty;
-            HP--;
-            print("YOU DED.");
-            Application.LoadLevel("GameOver");
+            if (HP == 3 && other.gameObject.CompareTag("Enemy"))
+            {
+                h3.sprite = Empty;
+                HP--;
+                waitTime = Time.time + 1f;
+            }
+            else if (HP == 2 && other.gameObject.CompareTag("Enemy"))
+            {
+                h2.sprite = Empty;
+                HP--;
+                waitTime = Time.time + 1f;
+            }
+            else if (HP == 1 && other.gameObject.CompareTag("Enemy"))
+            {
+                h1.sprite = Empty;
+                HP--;
+                waitTime = Time.time + 1f;
+                print("YOU DED.");
+                Application.LoadLevel("GameOver");
+            }
         }
     }
 

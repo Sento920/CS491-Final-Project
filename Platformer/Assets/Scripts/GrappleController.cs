@@ -31,7 +31,7 @@ public class GrappleController : MonoBehaviour
 		playerPos = parent.position;
 		playerController = GetComponentInParent<PlayerController> ();
 		lrc = GetComponentInChildren<LineRendererCode> ();
-		lrc.enabled = false;
+		//lrc.enabled = false;
 		lrc.myPoint1 = playerPos;
 		rb2D = GetComponent<Rigidbody2D> ();
 		bc2D = GetComponent<BoxCollider2D> ();

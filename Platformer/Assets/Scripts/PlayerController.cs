@@ -48,6 +48,10 @@ public class PlayerController : MonoBehaviour
 		} else {
 			animator.SetBool ("Walk", false);
 		}
+        if(grapple.grappleHit && push != 0)
+        {
+            rb2D.AddForce(new Vector2(push * 10, 0));
+        }
 
 		//change direction for walking
 		if (isGrounded) {
