@@ -10,6 +10,7 @@ public class BossMovement : MonoBehaviour {
     private Vector3 playerPos;
     private float waitTime;
     private float bossWait;
+    private int numHits;
 	// Use this for initialization
 	void Start () {
         childController = GetComponent<ChildController>();
@@ -44,4 +45,13 @@ public class BossMovement : MonoBehaviour {
             }
         }
 	}
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+
+        numHits++;
+        if (numHits >= 3)
+        {
+            Application.LoadLevel("Win");
+        }
+    }
 }
