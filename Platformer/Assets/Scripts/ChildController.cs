@@ -5,7 +5,7 @@ public class ChildController : MonoBehaviour {
     public GameObject player;
     public GameObject projectile;
     public GameObject[] childEyes;
-    public float waitTime;
+    private float waitTime;
     private Vector3 playerPos;
     private GameObject eyeToFire;
     private float closestDist;
