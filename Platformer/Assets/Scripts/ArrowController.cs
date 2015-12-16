@@ -28,5 +28,6 @@ public class ArrowController : MonoBehaviour {
 		empty.transform.SetParent (coll.transform);
 		transform.SetParent (empty.transform);
 		Destroy (GetComponent<Rigidbody2D> ());
+        Destroy (GetComponent<BoxCollider2D>());
 	}
 }
