@@ -26,7 +26,6 @@ public class ChildController : MonoBehaviour {
                 if(childEyes[i] != null)
                 {
                     closestDist = Vector2.Distance(player.transform.position, childEyes[i].transform.position);
-                    print("closest dist check " + i);
                     break;
                 }
             }
@@ -36,7 +35,6 @@ public class ChildController : MonoBehaviour {
                 //only closest one fires
                 if (childEyes[i] != null) {
                     float dist = Vector2.Distance(player.transform.position, childEyes[i].transform.position);
-                    print(childEyes[i].name + " dist " + dist + " closest dist " + closestDist);
                     if (dist <= closestDist)
                     {
                         closestDist = dist;
@@ -44,7 +42,6 @@ public class ChildController : MonoBehaviour {
                     }
                 }
             }
-            print(eyeToFire.name);
             if (eyeToFire != null)
             {
                 float angle = Mathf.Atan2(eyeToFire.transform.position.y - playerPos.y, eyeToFire.transform.position.x - playerPos.x) * Mathf.Rad2Deg;
@@ -53,5 +50,16 @@ public class ChildController : MonoBehaviour {
                 tmp.GetComponent<Rigidbody2D>().velocity = (playerPos - eyeToFire.transform.position).normalized * 20;
             }
         }
+    }
+
+    public int getChildCount()
+    {
+        int childNum = 0;
+        for (int i = 0; i < childEyes.Length; i++) {
+            if (childEyes[i] != null) {
+                childNum++;
+            }
+        }
+        return childNum;
     }
 }
